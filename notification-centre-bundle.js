@@ -67,8 +67,7 @@ function renderActions(actions) { //how to render notifications and GENERATE URL
         const {actionKey, payload} = action;
         switch (actionKey) {
             case 'NAVIGATE': return `<a onclick="onNotifNavigate(event)" href="${routes[payload.key](payload)}">${getLabel(action)}</a>`;
-            case 'POST':
-                return `<span onclick="doPost('${payload.url}')">${getLabel(action)}</span>`;
+            case 'POST': return `<span onclick="doPost('${payload.url}')">${getLabel(action)}</span>`;
             case 'OPEN_URL': return `<a href="${payload.url}" ${payload.target & `target="${payload.target}"` }>${getLabel(action)}</a>`;
             default: return `unknown ${actionKey}`;
         }
