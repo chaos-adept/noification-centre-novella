@@ -58,12 +58,17 @@ function onNotifNavigate(event) { //should we leave this page or change state?
     window.location = href;
 }
 
+function doPost(url) {
+    alert(` emaulate post to ${url}`);
+}
+
 function renderActions(actions) { //how to render notifications and GENERATE URLs
     return actions.map( action => {
         const {actionKey, payload} = action;
         switch (actionKey) {
-            case 'NAVIGATE': return `<a onclick="javascript:onNotifNavigate(event)" href="${routes[payload.key](payload)}">${getLabel(action)}</a>`;
-            case 'POST': return `<span onclick="javascript:alert('submit post: ${payload.url}')">${getLabel(action)}</span>`
+            case 'NAVIGATE': return `<a onclick="onNotifNavigate(event)" href="${routes[payload.key](payload)}">${getLabel(action)}</a>`;
+            case 'POST':
+                return `<span onclick="doPost('${payload.url}')">${getLabel(action)}</span>`;
             case 'OPEN_URL': return `<a href="${payload.url}" ${payload.target & `target="${payload.target}"` }>${getLabel(action)}</a>`;
             default: return `unknown ${actionKey}`;
         }
@@ -98,6 +103,6 @@ function shuffleArray(array) {
     return array;
 }
 
-setInterval(renderNotificationCenter, 5000, undefined, 100);
+setInterval(renderNotificationCenter, 10000, undefined, 100);
 
 renderNotificationCenter();
