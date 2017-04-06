@@ -10,7 +10,7 @@ const actionKeyLabels = { //something we currently have inside dotCMS
 };
 const getLabel = (action) => { return actionKeyLabels[action.payload.key] };
 
-const notifications = [ //payload from backend
+const getNotifcations = () => shuffleArray([ //payload from backend
     {
         id: 1,
         type: 'info',
@@ -30,9 +30,9 @@ const notifications = [ //payload from backend
         id: 2,
         type: 'action-required',
         context: {
-            message: 'Would you like to sign license?',
+            message: `Would you like to sign license for an article ${Math.floor(Math.random()*100)}?`,
             actions: [
-                { actionKey: "NAVIGATE", payload: { key: "SIGN_ARTICLE_LICENSE", id: "aid1" } },
+                { actionKey: "NAVIGATE", payload: { key: "SIGN_ARTICLE_LICENSE", id: "aid1" + Math.random() } },
                 { actionKey: "POST", payload: { key: 'CANCEL', url: "/api/remove/notif/1" } }
             ]
         }
@@ -41,14 +41,14 @@ const notifications = [ //payload from backend
         id: 3,
         type: 'action-required',
         context: {
-            message: 'You should review article',
+            message: `You should review article ${Math.floor(Math.random()*100)}`,
             actions: [
-                { actionKey: "NAVIGATE", payload: { key: "REVIEW_ARTICLE", id: "aid2" } },
+                { actionKey: "NAVIGATE", payload: { key: "REVIEW_ARTICLE", id: "aid2" + Math.random() } },
                 { actionKey: "POST", payload: { key: 'CANCEL', url: "/api/remove/notif/1" } }
             ]
         }
     }
-];
+]);
 
 
 function onNotifNavigate(event) { //should we leave this page or change state?
@@ -83,10 +83,21 @@ function renderNotification (item) {
 
 function renderNotificationCenter() {
     document.querySelector('.notif-center').innerHTML = `<ul>
-   ${notifications.map(item => `<li class="notification notification_${item.type}">${renderNotification(item)}</li>`).join('')}
+   ${getNotifcations().map(item => `<li class="notification notification_${item.type}">${renderNotification(item)}</li>`).join('')}
     </ul>`;
 
 };
 
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+setInterval(renderNotificationCenter, 3000, undefined, 100);
 
 renderNotificationCenter();
