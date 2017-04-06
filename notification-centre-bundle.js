@@ -98,6 +98,6 @@ function shuffleArray(array) {
     return array;
 }
 
-setInterval(renderNotificationCenter, 3000, undefined, 100);
+setInterval(renderNotificationCenter, 5000, undefined, 100);
 
 renderNotificationCenter();
