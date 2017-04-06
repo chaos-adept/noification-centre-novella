@@ -55,7 +55,6 @@ function onNotifNavigate(event) { //should we leave this page or change state?
     event.preventDefault();
     const href = event.target.getAttribute('href');
     const isCurrentApp = isCurrentAppUrl && isCurrentAppUrl(href);
-    alert(`could it be processed here ${isCurrentApp.toString().toUpperCase()}`);
     window.location = href;
 }
 
