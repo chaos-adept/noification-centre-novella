@@ -1,0 +1,42 @@
+h3 {
+  color: #929292;
+}
+
+body {
+  background: gray;
+  color: black;
+}
+
+.notif-center {
+  border: dashed ;
+}
+.notification {
+  display: block;
+  border: solid ;
+  background: yellow;
+}
+
+
+a:link {
+    text-decoration: none;
+}
+
+.notification_info {
+  background: white;
+}
+
+.notification_info::before {
+  color: gray;
+  border: dotted black;
+  content: '<info>';
+}
+
+.notification_action-required::before {
+  color: gray;
+  border: dotted black;
+  content: 'action';
+}
+
+.notification_unknown {
+  background: pink;
+}
